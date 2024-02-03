@@ -1,7 +1,6 @@
 const express = require ("express");
 const app =express();
 const cors= require("cors")
-const Port =3030;
 const videoRoutes= require("./routes/videos")
 
 
@@ -18,6 +17,6 @@ app.use(express.json());
 app.use("/videos", videoRoutes);
 
 app.listen(Port, ()=>{
-    console.log(`The server is listening the ${Port}`)
+    console.log(`The server is listening the ${PORT}`)
 })
 
