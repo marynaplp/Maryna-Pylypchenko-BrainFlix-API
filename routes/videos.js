@@ -89,4 +89,4 @@ router.post("/", upload.single("image"), (req, res) => {
 
 router.get("/", (req, res) => res.send("Video route works!"));
 
-modu
+module.exports = router;
