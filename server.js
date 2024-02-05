@@ -1,22 +1,18 @@
-const express = require ("express");
-const app =express();
-const cors= require("cors")
-const videoRoutes= require("./routes/videos")
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const videoRoutes = require("./routes/videos");
 
+// Configuration
+const PORT = 3010;
 
-//configuration
-require("dotenv").config();
-const PORT =process.env.PORT || 3030;
-
-//Middleware
-app.use(cors())
-app.use(express.static("public/images"))
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-//routes
+// Routes
 app.use("/videos", videoRoutes);
 
-app.listen(Port, ()=>{
-    console.log(`The server is listening the ${PORT}`)
-})
-
+app.listen(PORT, () => {
+  console.log(`Express server listening on port ${PORT}`);
+});
