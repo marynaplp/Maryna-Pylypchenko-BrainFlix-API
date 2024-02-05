@@ -3,29 +3,30 @@ const router = express.Router();
 const { v4: uuidv4 } = require("uuid"); // Unique ID Generator
 const fs = require("fs"); // fileSystem module
 const multer = require("multer");
+const path = require('path')
 
 const videoData = require("../data/videos.json");
 
 const PORT = 3010;
 
-// Middleware to parse JSON bodies
+// Middleware 
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/images");
+  destination: function(req, file, cb) {
+    cb(null, 'public/images'); // Make sure this path exists
   },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   },
+  //limits: { fileSize: 10 * 1024 * 1024 } // 10 MB limit
+
 });
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB limit
 });
+
+
 
 const writeToFile = (videos) => {
   fs.writeFileSync("./data/videos.json", JSON.stringify(videos, null, 2));
@@ -72,12 +73,12 @@ router.post("/", upload.single("image"), (req, res) => {
     id: uuidv4(),
     title: req.body.title,
     channel: "Maryna Plp",
-    image: `/images/${req.file.filename}`,
+    image: "../public/images/image3.jpeg",
     description: req.body.description,
     views: 0,
     likes: "0",
     duration: "1:10",
-    video: "https://project-2-api.herokuapp.com/stream",
+    video: "https://project-2-api.herokuapp.com/video",
     timestamp: Date.now(),
     comments: [],
   };
@@ -88,4 +89,4 @@ router.post("/", upload.single("image"), (req, res) => {
 
 router.get("/", (req, res) => res.send("Video route works!"));
 
-module.exports = router;
+modu

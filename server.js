@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use("/videos", videoRoutes);
-
+app.use(express.static("public"));
 app.listen(PORT, () => {
   console.log(`Express server listening on port ${PORT}`);
 });
